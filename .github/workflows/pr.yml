@@ -1,4 +1,4 @@
-name: 'Build LaTex Document'
+name: 'PR Checker'
 on:
     pull_request:
         branches: [ main ]
