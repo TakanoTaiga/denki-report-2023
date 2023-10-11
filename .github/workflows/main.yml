@@ -18,6 +18,9 @@ jobs:
       - uses: wtfjoke/setup-tectonic@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: make build workspace
+        run: mkdir ./build
       - name: Run Tectonic
         run: tectonic ./demo/*.tex --outdir ./build
       - name: Update
