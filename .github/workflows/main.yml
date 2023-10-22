@@ -24,7 +24,7 @@ jobs:
       - name: make build workspace
         run: mkdir ./build
       - name: Run Tectonic
-        run: tectonic ./demo/*.tex --outdir ./build
+        run: ./compile.sh
       - name: Update
         uses: s0/git-publish-subdir-action@develop
         env:

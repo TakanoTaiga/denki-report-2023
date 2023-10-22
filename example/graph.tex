@@ -1,0 +1,64 @@
+% ドキュメントの設定
+\documentclass[a4paper,11pt,xelatex,ja=standard]{bxjsarticle}
+\usepackage{tikz}
+\usetikzlibrary {datavisualization.formats.functions}
+\usepackage{pgfplots}
+
+% ドキュメント開始
+\begin{document}
+
+
+% 見出し
+\section{\LaTeX のつかいかた}
+% 小見出し
+\subsection{hogex}
+式\ref{eq:foobar}はfoobarの公式です。
+
+% 数式
+\begin{equation}
+    \label{eq:foobar}
+    foobar(x) = foo(x) + bar(x)
+\end{equation}
+
+\begin{tikzpicture}[scale=0.9]
+    \datavisualization[ 
+        scientific axes,
+        visualize as line/.list={mydata, fit}, 
+        mydata={style={thick,mark=*,red},label in legend={text=実験結果}},
+        fit={style={thick,mark=*,blue},label in legend={text=実験結果2}},
+        legend={north west inside},
+        x axis={label={データ個数（個）},length=10cm},
+        y axis={label={秒数（秒）},ticks={step=1.5},length=7cm},
+     ]
+     data[set=mydata] {
+             x, y
+             0, 0
+         10000, 0.2
+         20000, 0.6
+         30000, 1.5
+         40000, 2.0
+         50000, 3.0
+         60000, 3.5
+         70000, 5.0
+         80000, 6.0
+         90000, 7.5
+        100000, 9
+    }
+    data[set=fit] {
+          x, y
+         0, 0
+         10000, 0.5
+         20000, 1
+         30000, 1.6
+         40000, 2.2
+         50000, 3.1
+         60000, 3.8
+         70000, 5.2
+         80000, 6.4
+         90000, 7.8
+        100000, 9.5
+    };
+\end{tikzpicture}
+
+\end{document}
+
