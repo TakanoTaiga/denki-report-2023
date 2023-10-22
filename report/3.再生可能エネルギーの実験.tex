@@ -157,6 +157,97 @@
                 \caption{短絡電流と照度の依存関係}
             \end{figure}
         \subsubsection{電流電圧(I-V)特性の実験}
+            \begin{figure}[htbp]
+                \centering
+                \begin{tikzpicture}[scale=0.9]
+                    \datavisualization[ 
+                        scientific axes,
+                        visualize as line/.list={200lux, 20klux}, 
+                        200lux={style={thick,mark=*,black},label in legend={text=200lux}},
+                        20klux={style={thick,mark=triangle,black},label in legend={text=2万lux}},
+                        legend={north west outside},
+                        x axis={label={電圧[V]},length=10cm},
+                        y axis={label={電流[A]},length=7cm},
+                    ]
+                    data[set=200lux] {
+                        x, y
+                        0,	    0.093
+                        0.5,	0.095
+                        3,	    0.094
+                        4.5,	0.093
+                        7.3,	0.093
+                        8.9,	0.093
+                        11.3,	0.093
+                        13.4,	0.093
+                        15.6,	0.092
+                        16.3,	0.086
+                        16.7,	0.082
+                    }
+                    data[set=20klux] {
+                        x, y
+                        1.4,	0.463
+                        5.1,	0.462
+                        8,	    0.454
+                        14.6,	0.457
+                        16.1,	0.443
+                        18.2,	0.312
+                        18.9,	0.237
+                        19.2,	0.186
+                        19.4,	0.15
+                        19.5,	0.129
+                        19.5,	0.113
+                        19.6,	0.098
+                        19.5,	0.095
+                    };
+                \end{tikzpicture}
+                \caption{I-V特性グラフ}
+            \end{figure}
+
+            \begin{figure}[htbp]
+                \centering
+                \begin{tikzpicture}[scale=0.9]
+                    \datavisualization[ 
+                        scientific axes,
+                        visualize as line/.list={200lux, 20klux}, 
+                        200lux={style={thick,mark=*,black},label in legend={text=200lux}},
+                        20klux={style={thick,mark=triangle,black},label in legend={text=2万lux}},
+                        legend={north west outside},
+                        x axis={label={抵抗[Ω]},length=10cm},
+                        y axis={label={電力[W]},length=7cm},
+                    ]
+                    data[set=200lux] {
+                        x, y
+                        0,	0
+                        10,	0.0475
+                        20,	0.282
+                        30,	0.4185
+                        40,	0.6789
+                        50,	0.8277
+                        60,	1.0509
+                        70,	1.2462
+                        80,	1.4352
+                        90,	1.4018
+                        100,	1.3694
+                    }
+                    data[set=20klux] {
+                        x, y
+                        0,	0.6482
+                        10,	2.3562
+                        15,	3.632
+                        20,	6.6722
+                        25,	7.1323
+                        30,	5.6784
+                        40,	4.4793
+                        50,	3.5712
+                        60,	2.91
+                        70,	2.5155
+                        80,	2.2035
+                        90,	1.9208
+                        100, 1.8525
+                    };
+                \end{tikzpicture}
+                \caption{P-R特性グラフ}
+            \end{figure}
         \subsubsection{太陽電池の直列および並列接続の実験}
     \subsection{風力発電の特性実験}
 \section{実験の考察およびまとめ}
