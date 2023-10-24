@@ -3,6 +3,7 @@
 \usepackage{tikz}
 \usetikzlibrary {datavisualization.formats.functions}
 \usepackage{pgfplots}
+\usepackage{float}
 
 % ドキュメント開始
 \begin{document}
@@ -97,7 +98,7 @@
         \subsubsection{開放電圧および短絡電流の照度依存性試験}
 
             このグラフは照度が0から約7,500 luxまでの範囲で増加すると、開放電圧も急速に増加することを示しています。照度が約2,500luxを超えると、開放電圧はほぼ一定の値（約18V）に安定します。
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -126,7 +127,7 @@
             \end{figure}
 
             グラフから、照度が増加するにつれて短絡電流も増加していることが確認できます。2,500luxから線形に推移していることがわかります。
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -155,7 +156,7 @@
             \end{figure}
         \subsubsection{電流電圧(I-V)特性の実験}
             このグラフは電圧(V)と電流(I)の関係を示すものです。15Vの電圧値まで電流はほとんど変化しないが、その後急激に電流が減少することが確認できます。
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -202,7 +203,7 @@
             \end{figure}
 
             このグラフは電力と電流の関係を示すものです。電力はある抵抗値のところまで上昇しその後減少することがこのグラフからわかる。
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -249,7 +250,7 @@
             \end{figure}
         \subsubsection{太陽電池の直列および並列接続の実験}
             電圧が増加するにつれて電流も増加し、ある電圧でピークを迎えた後、電流が減少する特性を持っています。このピークは、それぞれの条件での最大電流を示しています。
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -321,9 +322,9 @@
                 \end{tikzpicture}
                 \caption{I-V特性グラフ}
             \end{figure}
-            抵抗が増加するにつれて電力が減少する傾向が示されています。具体的なデータの解析や詳細な情報は提供されていませんが、このグラフは抵抗と電力の関係を示しています。
+            抵抗が増加するにつれて電力が減少する傾向が示されています。このグラフは抵抗と電力の関係を示しています。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -401,7 +402,7 @@
 
             このグラフは風速と電圧の関係を表しています。負荷抵抗に関わらず風速に対して電圧が線形に推移しています。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -411,7 +412,7 @@
                         index_b={style={thick,dashed,mark=triangle,black},label in legend={text=負荷抵抗:20Ω}},
                         legend={north west inside},
                         x axis={label={風速[m/s]},length=10cm},
-                        y axis={label={電圧[V]},length=6cm},
+                        y axis={label={電圧[V]},length=5cm},
                     ]
                     data[set=index_a] {
                         x, y
@@ -441,11 +442,9 @@
                 \caption{風速と電圧の特性グラフ}
             \end{figure}
 
-            \newpage
-
             このグラフは風速と電流の関係を表しています。負荷抵抗に関わらず風速に対して電流が線形に推移しています。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -487,7 +486,7 @@
 
             このグラフは風速と電力の関係を表しています。負荷抵抗に関わらず風速に対して電力が$X^n$の形になることがわかります。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -529,9 +528,9 @@
 
         \subsubsection{風速と発電特性の実験}
 
-            このグラフは負荷抵抗と発電力の関係を関係を風の強さ別に表したグラフです。30$\%$付近で電力が最大となりその後ご減少していきます。
+            このグラフは負荷抵抗と発電力の関係を関係を風の強さ別に表したグラフです。30$\%$付近で電力が最大となりその後減少していきます。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -580,12 +579,12 @@
                 \end{tikzpicture}
                 \caption{風速と発電特性の特性グラフ}
             \end{figure}
-        
+
         \subsubsection{風速と充電特性の実験}
 
             発電電圧と充電電圧の特性を表したグラフです。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -621,11 +620,9 @@
                 \caption{発電電圧と充電電圧の特性グラフ}
             \end{figure}
 
-            \newpage
-
             発電電流と充電電流の特性を表したグラフです。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -663,7 +660,7 @@
 
             発電電力と充電電力の特性を表したグラフです。
 
-            \begin{figure}[htbp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}[scale=0.9]
                     \datavisualization[ 
@@ -710,11 +707,14 @@
         
             電力が特定の抵抗値まで上昇し、その後減少することが観測されたということは、太陽電池が最大電力点（MPP: Maximum Power Point）を持っていることを示しています。MPPは太陽電池が最大の出力を提供できる点を指します。
         \subsubsection{太陽電池の直列および並列接続の実験}
+            太陽電池を並列接続すると、各太陽電池の電流が合算されるため、電流がおおよそ2倍に増加します。しかし、並列接続の際、各太陽電池からの電圧はそのまま出力となるので、電圧の変化は見られません。一方、太陽電池を直列接続すると、各太陽電池の電圧が合算される結果、出力電圧が倍増します。しかし、直列接続された回路内では流れる電流は一定のため、電流は太陽電池の数に関わらず変わらないことが確認されます。    \subsection{風力発電の特性実験}
         
     \subsection{風力発電の特性実験}
         \subsubsection{風速と回転性能試験}
+            風力発電は風の運動エネルギーを電気エネルギーに変換する技術で、風速の増加は電圧と電流に線形の影響を与えます。しかし、電力と風速の関係は特定のXnの形を取ることが実験で確認され、これは風のエネルギーが風速の3乗に比例する特性を反映していると考えられます。
         \subsubsection{風速と発電特性の実験}
+            実験の結果から、風力発電の特性において、特定の負荷抵抗で発電力が最大となる点、すなわちMaximum Power Point（MPP）が存在することが確認されました。このMPPは風の強さによって変動するため、風力発電の効率を最大化するには、この点を継続的に追跡し最適化する必要があることが示唆されます。
         \subsubsection{風速と充電特性の実験}
-\section{参考文献}
+            風力発電の特性実験では、バッテリーの充電が開始するまでの電圧が低いこと、発電電流と充電電流、発電電力と充電電力の特性がほぼ一致していることが確認されました。これは、風力発電システムの効率が高く、生成された電力の大部分が充電に利用されていることを示しています。
 
 \end{document}
