@@ -1,3 +1,5 @@
+set -e
+
 mkdir ./build
 tectonic ./report/5.線形回路の過渡現象.tex --outdir ./build
 tectonic ./report/3.再生可能エネルギーの実験.tex --outdir ./build
