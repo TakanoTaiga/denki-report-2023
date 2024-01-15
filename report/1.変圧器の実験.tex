@@ -1,0 +1,237 @@
+% ドキュメントの設定
+\documentclass[a4paper,11pt,xelatex,ja=standard]{bxjsarticle}
+\usepackage{tikz}
+\usetikzlibrary {datavisualization.formats.functions}
+\usepackage{pgfplots}
+\usepackage{float}
+
+% ドキュメント開始
+\begin{document}
+
+\section{目的}
+    \begin{itemize}
+        \item 単相変圧器
+            \begin{itemize}
+                \item 単相変圧器の極性試験ができる。
+                \item 単相変圧器の実負荷試験により負荷特性を算出できる。
+                \item 単相変圧器の等価回路定数を算出できる。
+                \item アナログおよびデジタル電力計を使うことができる。
+            \end{itemize}
+        \item 三相交流
+            \begin{itemize}
+                \item 三相電力を測定できる(二電力計)。
+                \item 単相変圧器の三相結線ができる。
+            \end{itemize}
+    \end{itemize}
+\section{結果と考察}
+    \subsection{単相変圧器の極性試験}
+    以下の表の通り変圧器の極性は減極性だった。
+        \begin{table}[H]
+            \begin{tabular}{|c|c|c|c|}
+                \hline
+                V3[V] & V1[V] & V2[V] & 極性の判定 \\
+                \hline
+                97.5 & 200 & 102.5 & 減極性 \\
+                \hline
+            \end{tabular}
+            \caption{極性}
+        \end{table}
+    \subsection{単相変圧器の実負荷試験}
+        入力電圧が一定に固定しているため出力電圧はほぼ変化しなかった。しかし緩やか電圧が下がっているのは電流が増加したことで巻線などで$I^2R$の影響が大きくなっていると思われる。
+
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            1次電圧[V] & 1次電流[A] & 入力電力[W] & 2次電圧[V] & 2次電流[A] & 出力電力[W] & 効率[\%] \\
+            \hline\hline
+            201 & 10.4 & 2089 & 100 & 20.0 & 2004 & 95.9 \\
+            201 & 0.3  & 28   & 103 & 0    & 0    & 0.0  \\
+            201 & 1.2  & 232  & 103 & 1.9  & 204  & 87.9 \\
+            201 & 2.2  & 441  & 104 & 4.0  & 411  & 93.2 \\
+            201 & 3.2  & 649  & 102 & 6.0  & 616  & 94.9 \\
+            201 & 4.4  & 880  & 102 & 8.2  & 842  & 95.7 \\
+            201 & 5.2  & 1057 & 102 & 9.9  & 1015 & 96.0 \\
+            201 & 6.2  & 1258 & 102 & 11.9 & 1211 & 96.3 \\
+            201 & 7.4  & 1486 & 101 & 14.1 & 1411 & 95.0 \\
+            201 & 8.4  & 1683 & 101 & 16.0 & 1619 & 96.2 \\
+            201 & 9.4  & 1894 & 101 & 18.1 & 1821 & 96.1 \\
+            201 & 10.4 & 2086 & 100 & 20   & 2000 & 95.9 \\
+            201 & 11.4 & 2290 & 199 & 21.9 & 2193 & 95.8 \\
+            \hline
+            \end{tabular}
+        \end{table}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[ 
+                    scientific axes,
+                    visualize as line/.list={index_a}, 
+                    index_a={style={thick,mark=*,black},label in legend={text=電圧[V]}},
+                    x axis={label={電流[A]},length=10cm},
+                    y axis={label={電圧[V]},length=6cm,min value=0, max value=125},
+                ]
+                data[set=index_a] {
+                    x, y
+                    20.02, 100.2
+                    0, 103.3
+                    1.98, 102.9
+                    4.00, 102.6
+                    6.02, 102.3
+                    8.26, 101.9
+                    9.99, 101.6
+                    11.91, 101.5
+                    14.18, 101
+                    16.09, 100.7
+                    18.12, 100.6
+                    20, 100
+                    21.98, 99.8
+                };
+            \end{tikzpicture}
+            \caption{I-V特性グラフ}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \begin{axis}[
+                    xlabel={電流[A]},
+                    ylabel={効率[\%]},
+                    xmin=0, xmax=22,
+                    ymin=0, ymax=100,
+                    legend style={at={(0.03,0.97)},anchor=south west},
+                    grid=both,
+                    minor tick num=1,
+                    width=10cm,
+                    height=6cm,
+                ]
+                
+                \addplot[mark=*,mark size=2pt,mark options={color=black},thick] coordinates {
+                    
+                    (0, 0)
+                    (1.98, 87.9)
+                    (4.00, 93.2)
+                    (6.02, 94.9)
+                    (8.26, 95.7)
+                    (9.99, 96.0)
+                    (11.9, 96.3)
+                    (14.18, 95.0)
+                    (16.09, 96.2)
+                    (18.12, 96.1)
+                    (20, 95.9)
+                    (20.02, 95.9)
+                    (21.98, 95.8)
+                };
+                
+                \legend{データ}
+                \end{axis}
+            \end{tikzpicture}
+            \caption{I-効率特性グラフ}
+        \end{figure}
+
+        \subsection{単相変圧器の極性試験}
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|c|c|c|}
+                \hline
+                電圧@一次[V] & 電圧@二次[V] & 電圧変動率[\%] \\
+                \hline
+                100.2 & 103.3 & 3.09 \\
+                \hline
+                \end{tabular}
+                \caption{電圧データ}
+            \end{table}
+
+            \subsection{無負荷特性試験}
+                \begin{table}[H]
+                    \centering
+                    \begin{tabular}{|c|c|c|c|c|c|c|}
+                    \hline
+                    一次電圧[V] & 一次電流[A] & 入力電力[W] & Yo[S] & go[S] & bo[S] \\
+                    \hline
+                    200.1 & 0.374 & 27 & 0.00187 & 0.135 & $0.134i$ \\
+                    \hline
+                    \end{tabular}
+                    \caption{3.1のデータ}
+                \end{table}
+
+            \subsection{短絡試験}
+                \begin{table}[H]
+                    \centering
+                    \begin{tabular}{|c|c|c|c|c|c|c|}
+                    \hline
+                    一次電圧[V] & 一次電流[A] & 入力電力[W] & Zo[Ω] & R[Ω] & X[Ω] \\
+                    \hline
+                    7.7 & 9.851 & 61 & 0.782 & 0.629 & 0.46 \\
+                    \hline
+                    \end{tabular}
+                \caption{3.2のデータ}
+                \end{table}
+        \subsection{三相電力の測定}
+            \begin{table}[h]
+                \centering
+                \caption{電力計データ}
+                \begin{tabular}{|c|c|c|c|c|c|c|}
+                    \hline
+                    & 電力計1 & 電力計2 & 有効電力 & 無効電力 & 皮相電力 & 力率 \\
+                    \hline
+                    1 & 1200 & 1180 & 2380 & 34.6 & 2380.3 & 1.00 \\
+                    0.8 & 570 & 1438 & 2008 & 1503.4 & 2508.4 & 0.80 \\
+                    0.3 & 1166 & 78 & 1244 & 1884.4 & 2258.0 & 0.55 \\
+                    \hline
+            \end{tabular}
+
+        \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        1次線間電圧 & 1次相電圧 & 2次線間電圧 & 2次相電圧 & 結線方法 \\
+        \hline
+        200 & 114 & 58.8 & 57.8 & Y-$\Delta$ \\
+        \hline
+        200 & 199 & 101.1 & 100.5 & $\Delta$-$\Delta$ \\
+        \hline
+        200 & 199.7 & 174 & 100.5 & $\Delta$-Y \\
+        \hline
+        \end{tabular}
+        \caption{電圧データと結線方法の表}
+        \end{table}
+
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            側 & 線間電圧 (V) & 相電圧 (V) & 線電流 (A) & 相電流 (A) & 電力 (kW) & 力率 \\
+            \hline
+            1次側 & 196.1 & - & 4.994 & 2.84 & 1.685 & 0.993 \\
+            2次側 & 173.2 & 199.7 & 5.355 & - & 1.593 & 1 \\
+            \hline
+            \end{tabular}
+            \caption{電力変換装置の性能データ}
+            \label{table:performance_data}
+            \end{table}
+            
+\end{table}
+
+\clearpage
+            
+\section{考察実験の手順・結果・考察}
+
+    デルタ結線と同様の手順で結線を行い電源を一つだけ取り除く。
+
+    その結果
+
+    $Pv = 0.527[kw]$
+
+    $V=100[v]$
+
+    $I-3.04[A]$
+
+    $\frac{Pv}{2P}=\frac{0.527*10^3}{2*100*3.04} = 0.866$
+
+\section{まとめ}
+
+この実験を通して変圧器の基本的な特性から内部の電圧降下などを確認できた。
+
+\end{document}
