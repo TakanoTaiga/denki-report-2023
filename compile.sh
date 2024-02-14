@@ -1,6 +1,11 @@
 set -e
 
-mkdir ./build
+BUILD_DIR="./build"
+
+# ビルドディレクトリが存在しない場合のみスクリプトを実行
+if [ ! -d "$BUILD_DIR" ]; then
+    mkdir ./build
+fi
 
 tectonic ./report/1.変圧器の実験.tex --outdir ./build
 tectonic ./report/2.直流機の実験.tex --outdir ./build
