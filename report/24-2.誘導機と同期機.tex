@@ -1,0 +1,86 @@
+% ドキュメントの設定
+\documentclass[a4paper,11pt,xelatex,ja=standard]{bxjsarticle}
+\usepackage{tikz}
+\usetikzlibrary {datavisualization.formats.functions}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{amsmath}
+
+% ドキュメント開始
+\begin{document}
+
+\section{実験の目的}
+    \begin{enumerate}
+        \item 三相誘導電動機の各種始動方法および各種速度制御方法を習得する。
+        \item 三相誘導電動機の無負荷試験および拘束試験の方法を理解し，諸特性の測定を行う。
+        \item 同期発電機の無負荷試験および短絡試験のそれぞれの特性試験の方法を理解し，諸特性の測定を行う。
+    \end{enumerate}
+
+\section{実験の方法}
+    \begin{enumerate}
+        \item 週目
+        \begin{itemize}
+            \item 三相誘導電動機の始動および速度制御(電圧調整始動法・一次電圧法，二次抵抗法，インバータ制御法)
+            \item 三相誘導電動機の無負荷試験および拘束試験
+        \end{itemize}
+        \item 週目
+        \begin{itemize}
+            \item 同期発電機の無負荷試験および短絡試験
+        \end{itemize}
+    \end{enumerate}
+
+
+
+\section{誘導電動機の実験結果}
+    \subsection{実験機器}
+        \begin{itemize}
+            \item 三相誘導電動機‐直流発電機実験装置(東電舎テック， MG-2400IV) ※回路定数：\( r_1 = 0.7 \) [Ω]
+            \item 三相誘導電圧調整器
+            \item クランプオンパワーロガー(HIOKI PW3365)
+        \end{itemize}
+    \subsection{三相誘導電動機の始動試験と速度制御}
+        hogehoge
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[ 
+                    scientific axes,
+                    visualize as line/.list={increase, decrease}, 
+                    increase={style={thick,mark=*,blue},label in legend={text=一次電圧上昇時の回転速度}},
+                    decrease={style={thick,dashed,mark=triangle,red},label in legend={text=一次電圧減少時の回転速度}},
+                    legend={north west outside},
+                    x axis={label={一次電圧[V]},length=10cm},
+                    y axis={label={回転速度[rpm]},length=6cm},
+                ]
+                data[set=increase] {
+                    x, y
+                    25.8, 1358.9
+                    40.9, 1440.7
+                    59.6, 1469
+                    79.9, 1481
+                    100.4, 1486.8
+                    120.3, 1490
+                    140.3, 1492.2
+                    160.1, 1499.3
+                    180, 1494.4
+                    198.7, 1495.1
+                }
+                data[set=decrease] {
+                    x, y
+                    179, 1494.4
+                    159.6, 1493.6
+                    140.1, 1491.4
+                    120, 1488.1
+                    99.6, 1485.9
+                    79.7, 1480.8
+                    60.1, 1469.5
+                    40, 1439.4
+                    25.8, 1363.3
+                };
+            \end{tikzpicture}
+            \caption{一次電圧と回転速度の関係}
+        \end{figure}
+        
+        
+
+\end{document}

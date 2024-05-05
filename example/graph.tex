@@ -92,11 +92,11 @@
         \datavisualization[ 
             scientific axes,
             visualize as line/.list={index_a, index_b}, 
-            index_a={style={thick,mark=*,black},label in legend={text=発電}},
-            index_b={style={thick,dashed,mark=triangle,black},label in legend={text=充電}},
+            index_a={style={thick,mark=*,black},label in legend={text=aのインデックス}},
+            index_b={style={thick,dashed,mark=triangle,black},label in legend={text=bのインデックス}},
             legend={north west outside},
-            x axis={label={風速[m/s]},length=10cm},
-            y axis={label={電圧[V]},length=6cm},
+            x axis={label={x軸ラベル},length=10cm},
+            y axis={label={y軸ラベル},length=6cm},
         ]
         data[set=index_a] {
             x, y
@@ -107,7 +107,7 @@
             0,0
         };
     \end{tikzpicture}
-    \caption{I-V特性グラフ}
+    \caption{キャプション}
 \end{figure}
 
 \end{document}
