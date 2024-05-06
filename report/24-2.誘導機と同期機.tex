@@ -39,7 +39,8 @@
             \item クランプオンパワーロガー(HIOKI PW3365)
         \end{itemize}
     \subsection{三相誘導電動機の始動試験と速度制御}
-        hogehoge
+        誘導電動機への電圧を徐々に増加させると、約1500rpmで回転数が安定したことが確認されました。
+        また、電圧を増減させる際には、同じ電圧であれば回転数も同様であることが観察されました。
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}[scale=0.9]
@@ -80,7 +81,101 @@
             \end{tikzpicture}
             \caption{一次電圧と回転速度の関係}
         \end{figure}
+    \subsection{三相誘導電動機の始動試験と速度制御(二次抵抗法)}
+        実験の結果、始動抵抗を増加させると、回転数が減少し、始動時の電流も低下することが明らかになりました。逆に、始動抵抗を減少させると、回転数が増加し、始動時の電流が増加することが観察されました。
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+            \hline
+            \textbf{ノッチ位置} & \textbf{始動電圧} & \textbf{始動電流} & \textbf{電流} & \textbf{回転速度} & \textbf{(Is/In) * 100} & \textbf{ノッチ位置起動電流} & \textbf{ノッチ位置起動回転速度} \\
+            \hline
+            起動 & 197.8 & 8.41 & 3.015 & 1477.3 & 2.79 & 3 & 1493.6 \\
+            1/2 & 198.5 & 10.54 & 3.031 & 1485.2 & 3.48 & 3.002 & 1494.8 \\
+            1/4 & 198.1 & 14.3 & 2.998 & 1490.2 & 4.77 & 2.977 & 1494.5 \\
+            \hline
+        \end{tabular}
         
+    \subsection{三相誘導電動機の速度制御試験(インバータ駆動法)}
+    インバータの周波数が上がると、回転速度もそれに比例して増加していきます。また滑りは反比例して変化していきます。
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[
+                    scientific axes,            
+                    visualize as line/.list={speed},             
+                    speed={style={thick,mark=*,blue},label in legend={text=インバーター周波数と回転速度}},            
+                    legend={north west outside},            
+                    x axis={label={インバーター周波数[Hz]},length=10cm},
+                    y axis={label={回転速度[RPM]},length=6cm},
+                ]
+                data[set=speed] {
+                    x, y
+                    10, 298.1
+                    20, 597.7
+                    30, 897.1
+                    40, 1196.8
+                    50, 1496.1
+                    60, 1796.1
+                    70, 2094.8
+                };
+            \end{tikzpicture}
+            \caption{インバーター周波数と回転速度の関係}
+        \end{figure}
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[             
+                    scientific axes,            
+                    visualize as line/.list={slip},             
+                    slip={style={thick,mark=*,red},label in legend={text=インバーター周波数と滑り}},            
+                    legend={north west outside},            
+                    x axis={label={インバーター周波数[Hz]},length=10cm},
+                    y axis={label={滑り},length=6cm},
+                ]
+                data[set=slip] {
+                    x, y
+                    10, 0.63
+                    20, 0.38
+                    30, 0.32
+                    40, 0.27
+                    50, 0.26
+                    60, 0.22
+                    70, 0.25
+                };
+            \end{tikzpicture}
+            \caption{インバーター周波数と滑りの関係}
+        \end{figure}
         
+    
+    \subsection{三相誘導電動機の無負荷試験}
+
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.9]
+            \datavisualization[             
+                scientific axes,            
+                visualize as line/.list={power},             
+                power={style={thick,mark=*,green},label in legend={text=端子電圧と無負荷入力}},            
+                legend={north west outside},            
+                x axis={label={端子電圧[V]},length=10cm},
+                y axis={label={無負荷入力[kW]},length=6cm},
+            ]
+            data[set=power] {
+                x, y
+                25.900, 0.032
+                41.000, 0.036
+                59.900, 0.040
+                80.600, 0.047
+                100.300, 0.063
+                119.900, 0.070
+                140.100, 0.087
+                160.900, 0.102
+                180.100, 0.117
+                199.200, 0.133
+            };
+        \end{tikzpicture}
+        \caption{端子電圧と無負荷入力の関係}
+    \end{figure}
+    
+    \subsection{三相誘導電動機の拘束試験}
 
 \end{document}
