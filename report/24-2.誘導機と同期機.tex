@@ -147,35 +147,125 @@
         
     
     \subsection{三相誘導電動機の無負荷試験}
-
-    \begin{figure}[H]
-        \centering
-        \begin{tikzpicture}[scale=0.9]
-            \datavisualization[             
-                scientific axes,            
-                visualize as line/.list={power},             
-                power={style={thick,mark=*,green},label in legend={text=端子電圧と無負荷入力}},            
-                legend={north west outside},            
-                x axis={label={端子電圧[V]},length=10cm},
-                y axis={label={無負荷入力[kW]},length=6cm},
-            ]
-            data[set=power] {
-                x, y
-                25.900, 0.032
-                41.000, 0.036
-                59.900, 0.040
-                80.600, 0.047
-                100.300, 0.063
-                119.900, 0.070
-                140.100, 0.087
-                160.900, 0.102
-                180.100, 0.117
-                199.200, 0.133
-            };
-        \end{tikzpicture}
-        \caption{端子電圧と無負荷入力の関係}
-    \end{figure}
+        無負荷時に端子電圧を上げると緩やかに損失が増えていった。内部の損失が電圧に比例して増加していった。
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[             
+                    scientific axes,            
+                    visualize as line/.list={power},             
+                    power={style={thick,mark=*,green},label in legend={text=端子電圧と無負荷入力}},            
+                    legend={north west outside},            
+                    x axis={label={端子電圧[V]},length=10cm},
+                    y axis={label={無負荷入力[kW]},length=6cm},
+                ]
+                data[set=power] {
+                    x, y
+                    25.900, 0.032
+                    41.000, 0.036
+                    59.900, 0.040
+                    80.600, 0.047
+                    100.300, 0.063
+                    119.900, 0.070
+                    140.100, 0.087
+                    160.900, 0.102
+                    180.100, 0.117
+                    199.200, 0.133
+                };
+            \end{tikzpicture}
+            \caption{端子電圧と無負荷入力の関係}
+        \end{figure}
     
     \subsection{三相誘導電動機の拘束試験}
+        実験を行い結果を下記の表にまとめた。
+        \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|}
+                \hline
+                測定回数 & 電圧 & 入力電力 & 拘束電流 & 定格電圧での拘束電流 \\
+                \hline
+                1 & 40.6 & 390 & 8.475 & 41.75 \\
+                2 & 40.9 & 392 & 8.453 & 41.33 \\
+                3 & 40.6 & 393 & 8.454 & 41.65 \\
+                平均値 & 40.70 & 391.67 & 8.46 & 41.58 \\
+                \hline
+            \end{tabular}
+            \caption{測定結果の表}
+        \end{table}
 
+\section{誘導電動機の実験結果に対する考察}
+    実験では、三相誘導電動機の各種始動法について調査しました。直接始動法は最も単純であり、全電圧を電動機にかける方法ですが、始動電流が大きくなるため、電力系統に影響を与える可能性がある。スター・デルタ始動法では、始動時にスター接続を用いて電流を約1/3に抑え、その後デルタ接続に切り替えることで、切替時のトルク変動が欠点です。リアクトル始動法は始動時にリアクトルを回路に挿入し、電流を制限する方法で、始動トルクが低下することが欠点です。インバータ制御始動法では、インバータを使用して電源周波数を制御し、徐々に速度を上げることで、始動電流の抑制と精密な速度制御が可能ですが、設備コストが高いです。
+
+\section{同期発電機の実験結果}
+    \subsection{三相同期発電機の無負荷試験}
+        無負荷端子電圧を上昇させると発電機界磁電流も増大していった。実験では最大まで電圧を上げたのち電圧を下げていいったが上昇時と降下時では特に大きな差は見られなかった。
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[ 
+                    scientific axes,
+                    visualize as line/.list={magnetization_increase}, 
+                    magnetization_increase={style={thick,mark=*,blue},label in legend={text=界磁電流と無負荷端子電圧の関係}},
+                    legend={north west outside},
+                    x axis={label={発電機界磁電流 $I_f$ [A]},length=10cm},
+                    y axis={label={無負荷端子電圧 $V$ [V]},length=6cm},
+                ]
+                data[set=magnetization_increase] {
+                    x, y
+                    0.06, 6.5
+                    0.13, 30.7
+                    0.31, 60
+                    0.5, 90.1
+                    0.7, 121.9
+                    0.92, 150.6
+                    1.16, 182.5
+                    1.34, 200
+                    1.69, 228.1
+                    1.78, 229.9
+                    1.29, 197.6
+                    1.11, 179.9
+                    0.89, 149.2
+                    0.67, 120.6
+                    0.47, 87.9
+                    0.31, 60.3
+                    0.11, 29.9
+                    0, 6.6
+                    2.24, 254
+                };
+            \end{tikzpicture}
+            \caption{発電機界磁電流 $I_f$ と無負荷端子電圧 $V$ の関係}
+        \end{figure}
+    
+    \subsection{三相同期発電機の短絡試験}
+        発電機界磁電流を増加させると三相短絡電流も比例して増大していった。
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[scale=0.9]
+                \datavisualization[             
+                    scientific axes,            
+                    visualize as line/.list={short_circuit},             
+                    short_circuit={style={thick,mark=*,orange},
+                    label in legend={text=界磁電流と三相短絡電流の関係}},            
+                    legend={north west outside},            
+                    x axis={label={発電機界磁電流 $I_f$ [A]},length=10cm},
+                    y axis={label={三相短絡電流 $I$ [kA]},length=6cm},
+                ]
+                data[set=short_circuit] {
+                    x, y
+                    0, 0.484
+                    0, 1.174
+                    0.07, 2
+                    0.15, 2.807
+                    0.21, 3.64
+                    0.3, 4.502
+                    0.39, 5.314
+                    0.42, 5.801
+                    0.51, 6.687
+                };
+            \end{tikzpicture}
+            \caption{発電機界磁電流 $I_f$ と三相短絡電流 $I$ の関係}
+        \end{figure}
+    
+\section{同期発電機の実験結果に対する考察}
+        無負荷試験では、界磁電流 \(I_f\) が増加すると無負荷端子電圧 \(V\) も初期はほぼ線形に増加し、\(I_f = 0.7 \, \text{A}\) を超えると飽和し始め、ヒステリシスの影響は小さいです。短絡試験では、界磁電流の増加に伴い三相短絡電流 \(I\) が線形に増加し、磁気回路が飽和に達していないため飽和しないことが観測されました。
 \end{document}
