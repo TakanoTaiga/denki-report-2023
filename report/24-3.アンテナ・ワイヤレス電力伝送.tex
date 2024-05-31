@@ -1,10 +1,15 @@
 % ドキュメントの設定
 \documentclass[a4paper,11pt,xelatex,ja=standard]{bxjsarticle}
 \usepackage{tikz}
-\usetikzlibrary {datavisualization.formats.functions}
+\usetikzlibrary{datavisualization.formats.functions}
 \usepackage{pgfplots}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+
+\setmainfont{Times New Roman}  % 適宜フォントを選択
+\setmathfont{Latin Modern Math}
 
 % ドキュメント開始
 \begin{document}
@@ -13,20 +18,20 @@
     ネットワークアナライザを用いたアンテナのインピーダンス測定，２ポート測定法，Sパラメータ，ワイヤレス電力伝送効率の求め方を学び電磁界解析の結果と比較できる．
 
 \section{実験の理論または原理}
-    特性インピーダンス𝑍0が50 [Ω]のときの，反射係数は，(1)式で表される．
-    \[\Gamma = \frac{𝑍𝐿−𝑍0}{𝑍𝐿+𝑍0} = \frac{𝑍𝐿−50}{𝑍𝐿+50} \tag{1}\]
-    ここで𝑍𝐿は負荷インピーダンスである．
+    特性インピーダンス\(Z_0\)が50 [Ω]のときの，反射係数は，(1)式で表される．
+    \[\Gamma = \frac{Z_L−Z_0}{Z_L+Z_0} = \frac{Z_L−50}{Z_L+50} \tag{1}\]
+    ここで\(Z_L\)は負荷インピーダンスである．
     スミスチャートは，この反射係数を複素平面で表したものと，考えることができる．
     VSWR(定在波比)は(2)式で表される．
     \[\text{VSWR} = \frac{1+|\Gamma|}{1−|\Gamma|} \tag{2}\]
     リターンロスReturn Loss RLは
-    \[𝑅𝐿 = 20\log_{10}|\Gamma| \tag{3}\]
-    これはSパラメータの𝑆_{11}と同じである
+    \[RL = 20\log_{10}|\Gamma| \tag{3}\]
+    これはSパラメータの\(S_{11}\)と同じである
     散乱行列（Sパラメータ）
-    \[𝑆 = \begin{bmatrix}𝑆_{11} & 𝑆_{12} \\𝑆_{21} & 𝑆_{22}\end{bmatrix}\]
-    透過係数は𝑆_{21}と同じである.
+    \[S = \begin{bmatrix}S_{11} & S_{12} \\ S_{21} & S_{22}\end{bmatrix}\]
+    透過係数は\(S_{21}\)と同じである.
     スミスチャート上で，反射係数の絶対値が，0.5以下となる範囲はどこか考えてみましょう
-    \[\Gamma = \frac{𝑍𝐿− 𝑍0}{𝑍𝐿 + 𝑍0} = \frac{𝑍𝐿− 50}{𝑍𝐿 + 50} = 0.5\]
+    \[\Gamma = \frac{Z_L− Z_0}{Z_L + Z_0} = \frac{Z_L− 50}{Z_L + 50} = 0.5\]
 
 \section{実験の結果}
     \subsection{各種コネクタのインピーダンス測定}
