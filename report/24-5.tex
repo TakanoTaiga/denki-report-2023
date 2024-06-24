@@ -1,0 +1,435 @@
+% ドキュメントの設定
+\documentclass[a4paper,11pt,xelatex,ja=standard]{bxjsarticle}
+\usepackage{tikz}
+\usetikzlibrary {datavisualization.formats.functions}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{amsmath}
+
+% ドキュメント開始
+\begin{document}
+
+\section{実験の目的}
+    マイクロ波の回折などの現象や光ファイバコードにおける損失などの伝搬特性を測定し、理論または 文献と比較する。
+
+\section{実験の作業順序}
+    \subsection{同軸ケーブルの実験}
+        \subsubsection{パルス波入力による伝搬速度と減衰定数の測定}
+            \begin{enumerate}
+                \item 同軸ケーブルにファンクションジェネレータとオシロスコープを接続。終端を短絡と開放の両方で測定。
+                \item パルス波が終端で反射されて戻る時間がパルス幅の1/2〜1/5になるように、ファンクションジェネレータを調整。
+                \item オシロスコープの波形をスケッチし、パルス波の往復時間と入射波・反射波の電圧比を導出。
+                \item 観測波形から電磁波の伝搬速度を計算し、理論結果と比較。
+                \item 波形から同軸ケーブルの減衰定数を計算し、[dB/km]と[Np/km]で表現(終端での反射係数を1.0と仮定)。
+            \end{enumerate}
+
+        \subsubsection{パルス波入力による反射係数の測定}
+            \begin{enumerate}
+                \item 終端抵抗を変え、入射波と反射波の電圧比から反射係数を導出(ケーブルの損失を考慮)。
+                \item 終端抵抗が10, 25, 50, 75, 100, 250$\Omega$のときの反射係数を測定し、理論結果と比較。
+            \end{enumerate}
+
+        \subsubsection{定在波の電圧分布と電圧定在波比 (VSWR)の測定}
+            \begin{enumerate}
+                \item 同軸ケーブルに標準信号発生器とオシロスコープを接続。
+                \item 標準信号発生器を周波数9.9 MHz、変調度AM 0$\%$、出力80 dBに設定。
+                \item 終端抵抗が0, 50, 100$\Omega$、およびその他の抵抗値のときの定在波の電圧分布を測定・プロットし、その結果からVSWRを算出、理論結果と比較。
+            \end{enumerate}
+
+    \subsection{光ファイバの実験}
+        \subsubsection{カットバック法による伝送損失の測定}
+            \begin{enumerate}
+                \item \textbf{注意:} 光ファイバコードを大きな曲率半径(30cm以上)にして測定すること。
+                \item \textbf{手順:}
+                \begin{enumerate}
+                    \item 2mの光ファイバコードに安定化光源とパワーメータを接続する。波長0.66$\mu\text{m}$と0.85$\mu\text{m}$では安定化光源が異なる。
+                    \item 2mと2km(プラスチックは20m)の光ファイバコードを接続したときのパワーメータの読み取りから、伝送損失をdB/km単位で導出する。
+                    \item ガラスとプラスチック光ファイバの両方について、波長0.66$\mu\text{m}$と0.85$\mu\text{m}$でそれぞれ測定する。
+                \end{enumerate}
+            \end{enumerate}
+
+        \subsubsection{光ファイバ接続損失の測定}
+            \begin{enumerate}
+                \item 図2のように、2mの光ファイバコード2本をコネクタで接続し、安定化光源とパワーメータを接続して光出力を測定する。
+                \item 図1のように接続したときの光出力を基準として、コネクタによる光損失を算出する。
+                \item ガラスとプラスチック光ファイバの両方について、波長0.66$\mu\text{m}$と0.85$\mu\text{m}$でそれぞれ測定する。
+            \end{enumerate}
+
+        \subsubsection{光ファイバの曲げによる損失の測定}
+            \begin{enumerate}
+                \item 図3のように、2mのガラス光ファイバコードに安定化光源とパワーメータを接続し、直径Dの1回巻きのループを作る。
+                \item 直径Dが60mmのときと、光ファイバコードをまっすぐに伸ばしたときの出力から、曲げによる損失を算出する。
+                \item 波長0.66$\mu\text{m}$と0.85$\mu\text{m}$でそれぞれ測定し、結果を比較する。
+            \end{enumerate}
+
+\section{実験の結果}
+    \subsection{同軸ケーブルの実験}
+        \subsubsection{パルス波入力による伝搬速度と減衰定数の測定}
+            実験では、パルス波入力による伝搬速度と減衰定数の測定を行いました。以下に実験結果を示す。
+
+            \begin{itemize}
+                \item パルス幅: 2 µs
+                \item 往復時間: 1 µs
+                \item 入力電圧: 6.37 V
+                \item 反射電圧: 5.98 V
+            \end{itemize}
+
+            この情報から伝搬速度は $1.928 \times 10^8 \text{ m/s}$ と算出された。また、減衰定数も求められ、 $a = 0.33 \text{ Np/km} = 2.87 \text{ dB/km}$ となった。
+        
+        \subsubsection{パルス波入力による反射係数の測定}
+
+            この実験では、異なる負荷抵抗 \( R_L \) に対してパルス波を入力し、反射係数を測定した。
+            このデータから、負荷抵抗 \( R_L \) の値によって反射係数 \( P \) が変化することがわかります。特に、 \( R_L = 50 \) のとき反射係数が最も小さくなり、他の値では比較的高い値を示してる。
+
+
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}[scale=0.9]
+                    \datavisualization[ 
+                        scientific axes,
+                        visualize as line/.list={P}, 
+                        P={style={thick,mark=*,black},label in legend={text=P}},
+                        legend={north west outside},
+                        x axis={label={$R_L$},length=10cm, min value=0, max value=300},
+                        y axis={label={P},length=6cm, min value=0, max value=1},
+                    ]
+                    data[set=P] {
+                        x, y
+                        10, 0.68
+                        25, 0.38
+                        50, 0.02
+                        75, 0.22
+                        100, 0.36
+                        250, 0.73
+                    };
+                \end{tikzpicture}
+                \caption{パルス波入力による反射係数}
+            \end{figure}
+            
+
+            \begin{center}
+                \begin{table}[H]
+                    \caption{パルス波入力による反射係数}
+                    \centering
+                    \begin{tabular}{|c|c|c|c|}
+                        \hline
+                        $R_L$ & $V_1$ (高) & $V_2$ (低) & P \\
+                        \hline
+                        10 & 10.5 & 2.86 & 0.68 \\
+                        \hline
+                        25 & 8.15 & 4.54 & 0.38 \\
+                        \hline
+                        50 & 6.58 & 6.32 & 0.02 \\
+                        \hline
+                        75 & 7.80 & 5.32 & 0.22 \\
+                        \hline
+                        100 & 8.50 & 4.54 & 0.36 \\
+                        \hline
+                        250 & 10.5 & 2.56 & 0.73 \\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{center}
+        
+        \subsubsection{定在波の電圧分布と電圧定在波比 (VSWR)の測定}
+
+            実験では、異なる負荷抵抗 (RL) に対する定在波の電圧分布と電圧定在波比 (VSWR) を測定した。
+            短絡状態 (RL-0) では、位置 L=0 で電圧が最高値 10.95 を記録し、L=8 で再び最高値 12.75 に達するという電圧の変動が見られた。
+            一方、50Ω 負荷 (RL-50) では、電圧がほぼ一定で 6.85 ~ 7.10 の範囲で安定しており、VSWR がほぼ 1 であることが示唆される。
+            開放状態 (RL-∞) では、L=2 で最大 12.35、L=3 で 13.10 を記録し、その後 L=8 で最小値 0.42 となり、大きな電圧変動が観察された。
+            100Ω 負荷 (RL-100) では、電圧の変動は比較的少なく、L=0 で 8.75、L=8 で最小値 4.75、L=3 で最高値 9.05 を記録した。
+            これらの結果から、負荷抵抗の種類により定在波の電圧分布が大きく異なることがわかる。
+            特に、短絡状態および開放状態では大きな電圧変動が見られ、50Ω 負荷では電圧が安定していることが確認された。
+
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}[scale=0.9]
+                    \datavisualization[ 
+                        scientific axes,
+                        visualize as line/.list={index_0, index_50, index_infty, index_100}, 
+                        index_0={style={thick,mark=*,black},label in legend={text=RL-0}},
+                        index_50={style={thick,dashed,mark=triangle,black},label in legend={text=RL-50}},
+                        index_infty={style={thick,mark=square,black},label in legend={text=RL-$\infty$}},
+                        index_100={style={thick,dashed,mark=o,black},label in legend={text=RL-100}},
+                        legend={north west outside},
+                        x axis={label={L},length=10cm},
+                        y axis={label={電圧},length=6cm},
+                    ]
+                    data[set=index_0] {
+                        x, y
+                        0, 10.95
+                        1, 8.35
+                        2, 4.90
+                        3, 1.00
+                        4, 3.26
+                        5, 7.15
+                        6, 10.10
+                        7, 12.00
+                        8, 12.75
+                        9, 12.35
+                        10, 10.70
+                        11, 7.90
+                        12, 4.30
+                    }
+                    data[set=index_50] {
+                        x, y
+                        0, 7.10
+                        1, 7.10
+                        2, 7.10
+                        3, 7.10
+                        4, 7.10
+                        5, 6.95
+                        6, 6.85
+                        7, 6.85
+                        8, 6.85
+                        9, 6.85
+                        10, 6.85
+                        11, 6.85
+                        12, 6.85
+                    }
+                    data[set=index_infty] {
+                        x, y
+                        0, 7.65
+                        1, 10.50
+                        2, 12.35
+                        3, 13.10
+                        4, 12.55
+                        5, 11.00
+                        6, 8.20
+                        7, 4.32
+                        8, 0.42
+                        9, 4.00
+                        10, 8.16
+                        11, 10.75
+                        12, 12.50
+                    }
+                    data[set=index_100] {
+                        x, y
+                        0, 8.75
+                        1, 7.75
+                        2, 8.65
+                        3, 9.05
+                        4, 8.75
+                        5, 7.90
+                        6, 6.65
+                        7, 5.35
+                        8, 4.75
+                        9, 5.20
+                        10, 6.40
+                        11, 7.70
+                        12, 8.40
+                    };
+                \end{tikzpicture}
+                \caption{RLの各インデックスのグラフ}
+            \end{figure}
+        
+
+            \begin{center}
+                \begin{table}[H]
+                    \caption{定在波の電圧分布と電圧定在波比}
+                    \centering
+                    \begin{tabular}{lcccc}
+                        L & RL-0 & RL-50 & RL-\(\infty\) & RL-100 \\
+                        \hline
+                        0 & 10.95 & 7.10 & 7.65 & 8.75 \\
+                        1 & 8.35 & 7.10 & 10.50 & 7.75 \\
+                        2 & 4.90 & 7.10 & 12.35 & 8.65 \\
+                        3 & 1.00 & 7.10 & 13.10 & 9.05 \\
+                        4 & 3.26 & 7.10 & 12.55 & 8.75 \\
+                        5 & 7.15 & 6.95 & 11.00 & 7.90 \\
+                        6 & 10.10 & 6.85 & 8.20 & 6.65 \\
+                        7 & 12.00 & 6.85 & 4.32 & 5.35 \\
+                        8 & 12.75 & 6.85 & 0.42 & 4.75 \\
+                        9 & 12.35 & 6.85 & 4.00 & 5.20 \\
+                        10 & 10.70 & 6.85 & 8.16 & 6.40 \\
+                        11 & 7.90 & 6.85 & 10.75 & 7.70 \\
+                        12 & 4.30 & 6.85 & 12.50 & 8.40 \\
+                    \end{tabular}
+                \end{table}
+            \end{center}
+            
+        
+    \subsection{光ファイバの実験}
+        \subsubsection{カットバック法による伝送損失の測定}
+
+            dの値は$l_1$と$l_2$を伝送距離、$P1$,$P2$を減衰として
+            \[
+            d = \frac{P_1 - P_2}{l_2 - l_1} \, \text{dBm/km}
+            \]
+            という式から求めた。
+
+            プラスチックファイバの減衰定数は高く、特に0.85m波長では1688.9 dB/kmと極めて大きな値を示している。
+            一方、ガラスファイバの減衰定数は非常に低く、0.66m波長で6.56 dB/km、0.85m波長ではさらに低い1.96 dB/kmとなっている。
+
+            \begin{center}
+                \begin{table}[H]
+                    \caption{プラスチックファイバの減衰定数}
+                    \centering
+                    \begin{tabular}{|c|c|c|c|}
+                        \hline
+                        波長 (m) & 2m (dbm) & 20m (dbm) & d (db/km) \\
+                        \hline
+                        0.66 & -16.16 & -20.41 & 236.1 \\
+                        \hline
+                        0.85 & -11.81 & -42.21 & 1688.9 \\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{center}
+        
+            \begin{center}
+                \begin{table}[H]
+                    \caption{ガラスファイバの減衰定数}
+                    \centering
+                    \begin{tabular}{|c|c|c|c|}
+                        \hline
+                        波長 (m) & 2m (dbm) & 2km (dbm) & d (db/km) \\
+                        \hline
+                        0.66 & -48.33 & -61.43 & 6.56 \\
+                        \hline
+                        0.85 & -16.76 & -20.68 & 1.96 \\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{center}
+        
+        \subsubsection{光ファイバ接続損失の測定}
+
+            ガラスファイバはプラスチックファイバに比べて減衰率が低く、特に0.85µm波長で優れた光伝送性能を示している。
+
+            \begin{center}
+                \begin{table}[H]
+                    \caption{プラスチックファイバの減衰定数}
+                    \centering
+                    \begin{tabular}{|c|c|c|c|c|}
+                        \hline
+                        & 2m & 4m & L[dB] & a[dB/km] \\
+                        \hline
+                        0.66µm & -30.81 & -32.98 & 1.7 & 236.1 \\
+                        \hline
+                        0.85µm & -11.90 & -18.19 & 2.9 & 1688.9 \\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{center}
+            
+            \begin{center}
+                \begin{table}[H]
+                    \caption{ガラスファイバの減衰定数}
+                    \centering
+                    \begin{tabular}{|c|c|c|c|c|}
+                        \hline
+                        & 2m & 4m & L[dB] & a[dB/km] \\
+                        \hline
+                        0.66µm & -30.89 & -31.03 & 0.13 & 6.56 \\
+                        \hline
+                        0.85µm & -16.28 & -6.35 & 0.07 & 1.96 \\
+                        \hline
+                    \end{tabular}
+                \end{table}
+            \end{center}
+
+        \subsubsection{光ファイバの曲げによる損失の測定}
+            波長 0.66µmでは、まっすぐな状態での損失が-32.68dbmで、曲げ長さが6cmから15cmに増加するにつれて損失は若干増加し、最大で-32.93dbmになった。
+            波長 0.85µmでは、まっすぐな状態での損失が-16.15dbmで、曲げ長さが増加しても損失の変化は非常に小さく、最大で-16.27dbmになった。
+            この結果から、波長が長い光ほど、曲げによる損失の影響が少ないことがわかる。
+
+            \begin{center}
+                \begin{table}[H]
+                    \caption{光ファイバの曲げによる損失(単位はdbm)}
+                    \centering
+                \begin{tabular}{|c|c|c|c|c|c|c|}
+                    \hline
+                    波長(um) & まっすぐ & 6cm & 8cm & 10cm & 12cm & 15cm \\
+                    \hline
+                    0.66 & -32.68 & -32.77 & -32.75 & -32.73 & -32.73 & -32.93 \\
+                    \hline
+                    0.85 & -16.15 & -16.27 & -16.26 & -16.25 & -16.24 & -16.22 \\
+                    \hline
+                \end{tabular}
+                \end{table}
+            \end{center}
+            
+
+\section{実験の考察およびまとめ}
+
+\subsection{同軸ケーブルの考察}
+
+\begin{enumerate}
+    \item \textbf{同軸ケーブルの1mあたりの自己インダクタンスと静電容量の計算と比較}
+    \begin{itemize}
+        \item \textbf{計算方法}
+        \begin{itemize}
+            \item 自己インダクタンス \( L \) は、同軸ケーブルの構造と材質に依存し、次の式で求められる：
+            \[
+            L = \frac{\mu}{2\pi} \ln \left( \frac{b}{a} \right)
+            \]
+            ここで、 \( \mu \) は透磁率、 \( a \) は内導体の半径、 \( b \) は外導体の内半径。
+            \item 静電容量 \( C \) は次の式で求められる：
+            \[
+            C = \frac{2\pi \epsilon}{\ln \left( \frac{b}{a} \right)}
+            \]
+            ここで、 \( \epsilon \) は誘電率。
+        \end{itemize}
+        \item \( L \) と \( C \) から波長 \( \lambda \) と位相速度 \( v \) を導出し、事前課題で計算した結果と比較する。
+        \[
+        \lambda = \frac{v}{f}, \quad v = \frac{1}{\sqrt{LC}}
+        \]
+    \end{itemize}
+
+    \item \textbf{プローブとして用いた同軸ケーブルの長さを9.8mとした理由}
+    \begin{itemize}
+        \item 電圧分布を正確に測定するためには、定在波の波長に対して適切な長さのプローブが必要である。
+        \item 9.8mは、実験で使用する周波数帯域において適切な波長の整数倍または半波長になるように選定された。
+    \end{itemize}
+
+    \item \textbf{同軸ケーブルの損失の周波数依存性と減衰定数を小さくする工夫}
+    \begin{itemize}
+        \item 同軸ケーブルの損失は、主に導体損失と誘電体損失による。これらは周波数が高くなると増加する。
+        \item 衛星放送用の同軸ケーブルでは、損失を最小限に抑えるために、以下の工夫がなされている：
+        \begin{itemize}
+            \item 高品質の導体（例えば銀メッキ銅線）を使用。
+            \item 低損失の誘電体（例えば発泡ポリエチレン）を使用。
+            \item シールド層を増やして電磁干渉を減少させる。
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\subsection{ガラス光ファイバの考察}
+
+\begin{enumerate}
+
+    \item \textbf{光ファイバの曲げ損失の理由}
+    \begin{itemize}
+        \item 光ファイバを曲げると、光がコアからクラッドへ漏れるため、損失が大きくなる。
+        \item 曲率半径が小さいほど、漏れ光の割合が増えるため、損失が増加する。
+    \end{itemize}
+
+    \item \textbf{ガラス光ファイバの主な損失要因}
+    \begin{itemize}
+        \item \textbf{吸収損失}：材料内部での光エネルギーの吸収。
+        \item \textbf{散乱損失}：材料の不均一性による光の散乱。
+        \item \textbf{曲げ損失}：ファイバの曲げによる漏れ光。
+    \end{itemize}
+
+    \item \textbf{GI型、SI型、SM型光ファイバの比較}
+    \begin{itemize}
+        \item \textbf{GI型（グレーデッドインデックス）}
+        \begin{itemize}
+            \item コアの屈折率が中心から外側に向かって徐々に変化する。
+            \item モード分散が少なく、高速伝送が可能。
+        \end{itemize}
+        \item \textbf{SI型（ステップインデックス）}
+        \begin{itemize}
+            \item コアとクラッドの屈折率が急激に変わる。
+            \item 簡単に製造できるが、モード分散が大きい。
+        \end{itemize}
+        \item \textbf{SM型（シングルモード）}
+        \begin{itemize}
+            \item 非常に細いコアを持ち、単一のモードだけを伝送する。
+            \item 長距離伝送での損失が少なく、高速伝送に適している。
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\end{document}
