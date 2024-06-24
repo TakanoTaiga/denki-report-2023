@@ -7,6 +7,8 @@ if [ ! -d "$BUILD_DIR" ]; then
     mkdir ./build
 fi
 
+tectonic ./report/24-5.tex --outdir ./build
+
 tectonic ./report/24-4-2.tex --outdir ./build
 tectonic ./report/24-4-1.tex --outdir ./build
 
